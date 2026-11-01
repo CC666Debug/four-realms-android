@@ -22,6 +22,7 @@ import android.webkit.WebChromeClient
 import android.webkit.WebResourceRequest
 import android.webkit.WebView
 import android.webkit.WebViewClient
+import android.webkit.WebSettings
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.mediarouter.app.MediaRouteChooserDialog
@@ -127,6 +128,8 @@ class MainActivity : AppCompatActivity() {
         web.settings.javaScriptEnabled = true
         web.settings.domStorageEnabled = true
         web.settings.mediaPlaybackRequiresUserGesture = false
+        // Radio Caprice and other old stations only have http:// links; let them play like on the speakers.
+        web.settings.mixedContentMode = WebSettings.MIXED_CONTENT_ALWAYS_ALLOW
         web.webChromeClient = object : WebChromeClient() {
             // "Restore" in Saved songs: let the page pick a backup file.
             override fun onShowFileChooser(view: WebView, callback: ValueCallback<Array<Uri>>, params: FileChooserParams): Boolean {
